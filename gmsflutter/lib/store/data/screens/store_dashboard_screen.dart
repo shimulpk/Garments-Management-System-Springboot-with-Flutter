@@ -65,32 +65,38 @@ class StoreDashboardScreen extends ConsumerWidget {
                       title: 'Total Items',
                       value: '${dashboard.totalItems ?? 0}',
                       icon: Icons.inventory_2_outlined,
+                      color: Colors.blue,
                     ),
                     _StatCard(
                       title: 'Current Stock',
                       value: '${dashboard.currentStockItems ?? 0}',
                       icon: Icons.warehouse_outlined,
+                      color: Colors.green,
                     ),
                     _StatCard(
                       title: 'Low Stock',
                       value: '${dashboard.lowStockItems ?? 0}',
                       icon: Icons.warning_amber_outlined,
+                      color: Colors.orange,
                     ),
                     _StatCard(
                       title: 'Pending Requisitions',
                       value:
                       '${dashboard.pendingStoreRequisitions ?? 0}',
                       icon: Icons.pending_actions,
+                      color: Colors.purple,
                     ),
                     _StatCard(
                       title: 'Today GRN',
                       value: '${dashboard.todayGoodsReceive ?? 0}',
                       icon: Icons.move_to_inbox_outlined,
+                      color: Colors.teal,
                     ),
                     _StatCard(
                       title: 'Today Issue',
                       value: '${dashboard.todayMaterialIssue ?? 0}',
                       icon: Icons.outbox_outlined,
+                      color: Colors.indigo,
                     ),
                   ],
                 ),
@@ -212,11 +218,13 @@ class _StatCard extends StatelessWidget {
     required this.title,
     required this.value,
     required this.icon,
+    required this.color,
   });
 
   final String title;
   final String value;
   final IconData icon;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
