@@ -3,6 +3,7 @@ import 'package:gmsflutter/cutting/data/screens/add_day_wise_production_screen.d
 import 'package:gmsflutter/cutting/data/screens/cutting_home_screen.dart';
 import 'package:gmsflutter/cutting/data/screens/cutting_plans_screen.dart';
 import 'package:gmsflutter/cutting/data/screens/production_history_screen.dart';
+import 'package:gmsflutter/store/data/screens/store_dashboard_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter appRouter = GoRouter(
@@ -41,6 +42,13 @@ final GoRouter appRouter = GoRouter(
       path: '/cutting/history',
       builder: (context, state) {
         return const ProductionHistoryScreen();
+      },
+    ),
+
+    GoRoute(
+      path: '/store-dashboard',
+      builder: (context, state) {
+        return const StoreDashboardScreen();
       },
     ),
   ],

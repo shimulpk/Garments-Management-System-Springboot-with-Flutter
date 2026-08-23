@@ -59,11 +59,29 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         next.whenOrNull(
 
           data: (user) {
+            if (user == null) return;
 
-            if (user != null) {
+            switch (user.role) {
+              case 'CUTTING_MANAGER':
+                context.go('/cutting');
+                break;
 
-              context.go('/cutting');
+              case 'STORE_MANAGER':
+                context.go('/store-dashboard');
+                break;
 
+              case 'ADMIN':
+                context.go('/store-dashboard');
+                break;
+
+              default:
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'No dashboard available for role: ${user.role}',
+                    ),
+                  ),
+                );
             }
           },
 

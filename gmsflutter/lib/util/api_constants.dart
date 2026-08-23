@@ -29,7 +29,7 @@ class ApiConstants {
   static const String dashboard = 'dashboard';
   static const String merchandiserDashboard = 'dashboard/merchandiser';
   static const String purchaseDashboard = 'dashboard/purchase';
-  static const String storeDashboard = 'dashboard/store';
+  static const String storeDashboard = '/dashboard/store';
   static const String productionDashboard = 'dashboard/production';
   static const String cuttingDashboard = 'dashboard/cutting';
   static const String sewingDashboard = 'dashboard/sewing';
