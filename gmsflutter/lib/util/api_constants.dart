@@ -30,7 +30,6 @@ class ApiConstants {
   static const String merchandiserDashboard = 'dashboard/merchandiser';
   static const String purchaseDashboard = 'dashboard/purchase';
   static const String storeDashboard = '/dashboard/store';
-  static const String productionDashboard = 'dashboard/production';
   static const String cuttingDashboard = 'dashboard/cutting';
   static const String sewingDashboard = 'dashboard/sewing';
   static const String finishingDashboard = 'dashboard/finishing';
@@ -51,7 +50,8 @@ class ApiConstants {
   static const String grns = 'grns';
 
   // ── Inventory ─────────────────────────────────────────
-  static const String items = 'items';
+  static const String items = '/items';
+  static String itemById(int id) => '/items/$id';
   static const String stocks = 'stocks';
   static const String materialIssues = 'material-issues';
 
@@ -82,19 +82,11 @@ class ApiConstants {
   static String cuttingHistorySummary(int cuttingPlanId, String date) =>
       'day-wise-cutting-production/history-details-summary?cuttingPlanId=$cuttingPlanId&date=$date';
 
-  // ── Production - Sewing ───────────────────────────────
-  static const String sewingPlans = 'sewing-plans';
-  static const String dayWiseSewingProduction = 'day-wise-sewing-productions';
 
-  // ── Production - Finishing ────────────────────────────
-  static const String finishingPlans = 'finishing-plans';
-  static const String dayWiseFinishingProduction =
-      'day-wise-finishing-productions';
 
-  // ── Production - Packing ──────────────────────────────
-  static const String packingPlans = 'packing-plans';
-  static const String dayWisePackingProduction = 'day-wise-packing-productions';
 
-  // ── Shipment ──────────────────────────────────────────
-  static const String shipments = 'shipments';
+
+
+
+
 }

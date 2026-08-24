@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gmsflutter/store/data/provider/store_provider.dart';
+import 'package:go_router/go_router.dart';
 
 class StoreDashboardScreen extends ConsumerWidget {
   const StoreDashboardScreen({super.key});
@@ -99,6 +100,17 @@ class StoreDashboardScreen extends ConsumerWidget {
                       color: Colors.indigo,
                     ),
                   ],
+                ),
+
+                const SizedBox(height: 16),
+
+                SizedBox(
+                  height: 50,
+                  child: ElevatedButton.icon(
+                    onPressed: () => context.push('/store/items'),
+                    icon: const Icon(Icons.inventory_2_outlined),
+                    label: const Text('Manage Items'),
+                  ),
                 ),
 
                 const SizedBox(height: 24),
@@ -229,12 +241,30 @@ class _StatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
+      elevation: 2,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          gradient: LinearGradient(
+            colors: [
+              color.withValues(alpha: 0.12),
+              color.withValues(alpha: 0.03),
+            ],
+          ),
+        ),
         padding: const EdgeInsets.all(14),
         child: Row(
           children: [
-            Icon(icon, size: 30),
+            CircleAvatar(
+              backgroundColor: color.withValues(alpha: 0.15),
+              child: Icon(
+                icon,
+                color: color,
+              ),
+            ),
+
             const SizedBox(width: 12),
+
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -242,12 +272,15 @@ class _StatCard extends StatelessWidget {
                 children: [
                   Text(
                     value,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
+                      color: color,
                     ),
                   ),
+
                   const SizedBox(height: 4),
+
                   Text(
                     title,
                     maxLines: 2,
