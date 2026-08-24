@@ -144,6 +144,9 @@ class _ItemListScreenState extends ConsumerState<ItemListScreen> {
                             ),
                           ],
                         ),
+                        onTap: () {
+                          context.push('/store/items/details/${item.id}');
+                        },
                       ),
                     );
                   },

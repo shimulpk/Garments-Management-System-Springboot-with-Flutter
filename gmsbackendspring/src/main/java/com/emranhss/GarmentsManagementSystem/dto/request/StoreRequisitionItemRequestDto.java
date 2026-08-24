@@ -9,5 +9,4 @@ public class StoreRequisitionItemRequestDto {
 
     private Double quantity;
 
-
 }
