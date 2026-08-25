@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gmsflutter/store/data/provider/store_provider.dart';
+import 'package:go_router/go_router.dart';
 
 import '../provider/store_requisition_provider.dart';
 
@@ -17,39 +18,72 @@ class StoreRequisitionDetailsScreen extends ConsumerWidget {
     final requisitionAsync =
     ref.watch(storeRequisitionByIdProvider(requisitionId));
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Requisition Details'),
-      ),
-      body: requisitionAsync.when(
-        loading: () => const Center(
+    return requisitionAsync.when(
+      loading: () => const Scaffold(
+        body: Center(
           child: CircularProgressIndicator(),
         ),
-        error: (error, stack) => Center(
-          child: Text('Failed to load requisition\n$error'),
+      ),
+
+      error: (error, stack) => Scaffold(
+        appBar: AppBar(
+          title: const Text('Requisition Details'),
         ),
-        data: (requisition) {
-          final status = requisition.status ?? 'PENDING';
+        body: Center(
+          child: Text(
+            'Failed to load requisition\n$error',
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
 
-          final canApprove = status == 'PENDING';
-          final canReject = status == 'PENDING';
+      data: (requisition) {
+        final status = requisition.status ?? 'PENDING';
 
-          return SingleChildScrollView(
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Requisition Details'),
+
+            actions: [
+              // only pending e edit icon show
+              if (status == 'PENDING')
+                IconButton(
+                  icon: const Icon(Icons.edit),
+                  tooltip: 'Edit Requisition',
+                  onPressed: () {
+                    context.push(
+                      '/store/requisitions/edit/$requisitionId',
+                    );
+                  },
+                ),
+            ],
+          ),
+
+          body: SingleChildScrollView(
             padding: const EdgeInsets.all(16),
+
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+
+                // =========================
+                // Requisition Information
+                // =========================
+
                 Card(
                   elevation: 3,
                   child: Padding(
                     padding: const EdgeInsets.all(18),
+
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+
                         Row(
                           mainAxisAlignment:
                           MainAxisAlignment.spaceBetween,
                           children: [
+
                             Text(
                               requisition.prNo ?? 'PR',
                               style: const TextStyle(
@@ -57,6 +91,7 @@ class StoreRequisitionDetailsScreen extends ConsumerWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+
                             Chip(
                               label: Text(status),
                             ),
@@ -70,16 +105,19 @@ class StoreRequisitionDetailsScreen extends ConsumerWidget {
                           value:
                           requisition.requisitionDate ?? '-',
                         ),
+
                         _InfoRow(
                           title: 'Requested By',
                           value:
                           requisition.requestedBy ?? '-',
                         ),
+
                         _InfoRow(
                           title: 'Department',
                           value:
                           requisition.department ?? '-',
                         ),
+
                         _InfoRow(
                           title: 'Remarks',
                           value:
@@ -92,7 +130,11 @@ class StoreRequisitionDetailsScreen extends ConsumerWidget {
                   ),
                 ),
 
-                const SizedBox(height: 18),
+                const SizedBox(height: 20),
+
+                // =========================
+                // Items
+                // =========================
 
                 const Text(
                   'Requested Items',
@@ -106,20 +148,27 @@ class StoreRequisitionDetailsScreen extends ConsumerWidget {
 
                 ...requisition.items.map(
                       (item) => Card(
-                    margin: const EdgeInsets.only(bottom: 10),
+                    margin:
+                    const EdgeInsets.only(bottom: 10),
+
                     child: ListTile(
                       leading: const CircleAvatar(
-                        child: Icon(Icons.inventory_2_outlined),
+                        child: Icon(
+                          Icons.inventory_2_outlined,
+                        ),
                       ),
+
                       title: Text(
                         item.itemName ?? '-',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+
                       subtitle: Text(
                         'Unit: ${item.unit ?? '-'}',
                       ),
+
                       trailing: Text(
                         '${item.quantity ?? 0}',
                         style: const TextStyle(
@@ -131,39 +180,12 @@ class StoreRequisitionDetailsScreen extends ConsumerWidget {
                   ),
                 ),
 
-                const SizedBox(height: 20),
 
-                if (canApprove)
-                  SizedBox(
-                    height: 50,
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        _approve(context, ref);
-                      },
-                      icon: const Icon(Icons.check),
-                      label: const Text('Approve Requisition'),
-                    ),
-                  ),
-
-                if (canApprove && canReject)
-                  const SizedBox(height: 10),
-
-                if (canReject)
-                  SizedBox(
-                    height: 50,
-                    child: OutlinedButton.icon(
-                      onPressed: () {
-                        _reject(context, ref);
-                      },
-                      icon: const Icon(Icons.close),
-                      label: const Text('Reject Requisition'),
-                    ),
-                  ),
               ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

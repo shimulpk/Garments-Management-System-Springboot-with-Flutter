@@ -111,6 +111,20 @@ class StoreDashboardScreen extends ConsumerWidget {
                     icon: const Icon(Icons.inventory_2_outlined),
                     label: const Text('Manage Items'),
                   ),
+
+                ),
+
+                const SizedBox(height: 10),
+
+                SizedBox(
+                  height: 50,
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      context.push('/store/requisitions');
+                    },
+                    icon: const Icon(Icons.assignment_outlined),
+                    label: const Text('Store Requisitions'),
+                  ),
                 ),
 
                 const SizedBox(height: 24),
