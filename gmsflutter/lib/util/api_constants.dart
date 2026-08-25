@@ -47,7 +47,7 @@ class ApiConstants {
   static const String vendors = 'vendors';
 
   static const String purchaseOrders = 'purchase-orders';
-  static const String grns = 'grns';
+
 
   // ── Inventory ─────────────────────────────────────────
   static const String items = '/items';
@@ -70,8 +70,14 @@ class ApiConstants {
 
   static String rejectStoreRequisition(int id) =>
       'store-requisitions/$id/reject';
+
+  static const String grns = 'grns';
+
+  static String grnById(int id) => 'grns/$id';
+
   static const String stocks = 'stocks';
   static const String materialIssues = 'material-issues';
+
 
   // ── Production - Cutting ──────────────────────────────
   static const String cuttingPlans = 'cutting-plans';
