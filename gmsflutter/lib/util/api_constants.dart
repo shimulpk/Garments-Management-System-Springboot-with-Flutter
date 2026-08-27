@@ -75,8 +75,13 @@ class ApiConstants {
 
   static String grnById(int id) => 'grns/$id';
 
-  static const String stocks = 'stocks';
   static const String materialIssues = 'material-issues';
+
+  static String materialIssueById(int id) =>
+      'material-issues/$id';
+
+  static const String stocks = 'stocks';
+
 
 
   // ── Production - Cutting ──────────────────────────────

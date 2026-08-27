@@ -5,10 +5,16 @@ import 'package:gmsflutter/cutting/data/screens/cutting_plans_screen.dart';
 import 'package:gmsflutter/cutting/data/screens/production_history_screen.dart';
 import 'package:gmsflutter/store/data/screens/add_item_screen.dart';
 import 'package:gmsflutter/store/data/screens/add_store_requisition_screen.dart';
+import 'package:gmsflutter/store/data/screens/create_material_issue_screen.dart';
+import 'package:gmsflutter/store/data/screens/current_stock_screen.dart';
 import 'package:gmsflutter/store/data/screens/edit_item_screen.dart';
 import 'package:gmsflutter/store/data/screens/edit_store_requisition_screen.dart';
+import 'package:gmsflutter/store/data/screens/grn_details_screen.dart';
+import 'package:gmsflutter/store/data/screens/grn_list_screen.dart';
 import 'package:gmsflutter/store/data/screens/item_details_screen.dart';
 import 'package:gmsflutter/store/data/screens/item_list_screen.dart';
+import 'package:gmsflutter/store/data/screens/material_issue_details_screen.dart';
+import 'package:gmsflutter/store/data/screens/material_issue_list_screen.dart';
 import 'package:gmsflutter/store/data/screens/store_dashboard_screen.dart';
 import 'package:gmsflutter/store/data/screens/store_requisition_details_screen.dart';
 import 'package:gmsflutter/store/data/screens/store_requisition_list_screen.dart';
@@ -123,6 +129,64 @@ final GoRouter appRouter = GoRouter(
         return EditStoreRequisitionScreen(
           requisitionId: id,
         );
+      },
+    ),
+
+    GoRoute(
+      path: '/store/grn',
+      builder: (context, state) =>
+      const GrnListScreen(),
+    ),
+
+    GoRoute(
+      path: '/store/grn/details/:id',
+      builder: (context, state) {
+        final id = int.parse(
+          state.pathParameters['id']!,
+        );
+
+        return GrnDetailsScreen(
+          grnId: id,
+        );
+      },
+    ),
+
+    // GoRoute(
+    //   path: '/store/grn/add',
+    //   builder: (context, state) {
+    //     return const CreateGrnScreen();
+    //   },
+    // ),
+
+    GoRoute(
+      path: '/store/material-issues',
+      builder: (context, state) {
+        return const MaterialIssueListScreen();
+      },
+    ),
+
+    GoRoute(
+      path: '/store/material-issues/add',
+      builder: (context, state) {
+        return const CreateMaterialIssueScreen();
+      },
+    ),
+
+    GoRoute(
+      path: '/store/material-issues/details/:id',
+      builder: (context, state) {
+        final id = int.parse(state.pathParameters['id']!);
+
+        return MaterialIssueDetailsScreen(
+          issueId: id,
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/store/stock',
+      builder: (context, state) {
+        return const CurrentStockScreen();
       },
     ),
   ],
