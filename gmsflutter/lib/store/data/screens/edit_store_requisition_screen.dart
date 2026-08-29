@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
 
 import '../models/store_requisition_item_request.dart';
 import '../models/store_requisition_request.dart';
@@ -41,6 +42,7 @@ class _EditStoreRequisitionScreenState
     final itemsAsync = ref.watch(allItemsProvider);
 
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('Edit Requisition'),
       ),

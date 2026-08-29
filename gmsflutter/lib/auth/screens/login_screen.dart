@@ -67,11 +67,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 break;
 
               case 'STORE_MANAGER':
-                context.go('/store-dashboard');
+                context.go('/store/dashboard');
                 break;
 
-              case 'ADMIN':
-                context.go('/store-dashboard');
+              case 'PURCHASE_MANAGER':
+                context.go('/procurement/dashboard');
                 break;
 
               default:

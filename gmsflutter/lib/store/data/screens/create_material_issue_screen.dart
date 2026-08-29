@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gmsflutter/store/data/models/stock_response.dart';
 import 'package:gmsflutter/store/data/provider/stock_provider.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
 
 import '../models/material_issue_request.dart';
 import '../provider/material_issue_provider.dart';
@@ -308,6 +309,7 @@ class _CreateMaterialIssueScreenState
     final stocksAsync = ref.watch(availableStocksProvider);
 
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('New Material Issue'),
       ),

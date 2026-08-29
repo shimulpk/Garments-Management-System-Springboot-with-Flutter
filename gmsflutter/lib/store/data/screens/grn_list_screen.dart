@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gmsflutter/store/data/provider/goods_receive_note_provider.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
 import 'package:go_router/go_router.dart';
 
 class GrnListScreen extends ConsumerWidget {
@@ -11,6 +12,7 @@ class GrnListScreen extends ConsumerWidget {
     final grnsAsync = ref.watch(allGrnsProvider);
 
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('Goods Receive Notes'),
         actions: [

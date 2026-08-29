@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
 import 'package:go_router/go_router.dart';
 
 import '../provider/store_provider.dart';
-import 'add_item_screen.dart';
+
 
 class ItemListScreen extends ConsumerStatefulWidget {
   const ItemListScreen({super.key});
@@ -27,6 +28,7 @@ class _ItemListScreenState extends ConsumerState<ItemListScreen> {
     final itemsAsync = ref.watch(allItemsProvider);
 
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('Items'),
         actions: [

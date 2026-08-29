@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gmsflutter/store/data/provider/store_provider.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
 import 'package:go_router/go_router.dart';
 
 import '../provider/store_requisition_provider.dart';
@@ -41,6 +42,7 @@ class StoreRequisitionDetailsScreen extends ConsumerWidget {
         final status = requisition.status ?? 'PENDING';
 
         return Scaffold(
+          drawer: const AppSidebar(),
           appBar: AppBar(
             title: const Text('Requisition Details'),
 

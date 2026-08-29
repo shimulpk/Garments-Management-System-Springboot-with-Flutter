@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
 
 import '../provider/material_issue_provider.dart';
 
@@ -18,6 +19,7 @@ class MaterialIssueDetailsScreen extends ConsumerWidget {
     );
 
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('Material Issue Details'),
       ),

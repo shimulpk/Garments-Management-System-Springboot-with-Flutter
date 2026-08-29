@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gmsflutter/store/data/provider/store_provider.dart';
-import 'package:go_router/go_router.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
+
 
 class StoreDashboardScreen extends ConsumerWidget {
   const StoreDashboardScreen({super.key});
@@ -11,6 +12,7 @@ class StoreDashboardScreen extends ConsumerWidget {
     final dashboardAsync = ref.watch(storeDashboardProvider);
 
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('Store Dashboard'),
         actions: [
@@ -104,67 +106,7 @@ class StoreDashboardScreen extends ConsumerWidget {
 
                 const SizedBox(height: 16),
 
-                SizedBox(
-                  height: 50,
-                  child: ElevatedButton.icon(
-                    onPressed: () => context.push('/store/items'),
-                    icon: const Icon(Icons.inventory_2_outlined),
-                    label: const Text('Manage Items'),
-                  ),
 
-                ),
-
-                const SizedBox(height: 10),
-
-                SizedBox(
-                  height: 50,
-                  child: ElevatedButton.icon(
-                    onPressed: () {
-                      context.push('/store/requisitions');
-                    },
-                    icon: const Icon(Icons.assignment_outlined),
-                    label: const Text('Store Requisitions'),
-                  ),
-                ),
-
-                const SizedBox(height: 10),
-
-                SizedBox(
-                  height: 50,
-                  child: ElevatedButton.icon(
-                    onPressed: () {
-                      context.push('/store/grn');
-                    },
-                    icon: const Icon(Icons.assignment_outlined),
-                    label: const Text('Goods Receive Note'),
-                  ),
-                ),
-
-                const SizedBox(height: 10),
-
-                SizedBox(
-                  height: 50,
-                  child: ElevatedButton.icon(
-                    onPressed: () {
-                      context.push('/store/material-issues');
-                    },
-                    icon: const Icon(Icons.outbox_outlined),
-                    label: const Text('Material Issues'),
-                  ),
-                ),
-
-                const SizedBox(height: 10),
-
-                SizedBox(
-                  height: 50,
-                  child: ElevatedButton.icon(
-                    onPressed: () {
-                      context.push('/store/stock');
-                    },
-                    icon: const Icon(Icons.warehouse_outlined),
-                    label: const Text('Current Stock'),
-                  ),
-                ),
 
                 const SizedBox(height: 24),
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
 
 import '../models/item_request.dart';
 import '../provider/store_provider.dart';
@@ -76,6 +77,7 @@ class _AddItemScreenState extends ConsumerState<AddItemScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('Add Item'),
       ),

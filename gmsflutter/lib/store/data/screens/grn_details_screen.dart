@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
 
 import '../provider/goods_receive_note_provider.dart';
 
@@ -16,6 +17,7 @@ class GrnDetailsScreen extends ConsumerWidget {
     final grnAsync = ref.watch(grnByIdProvider(grnId));
 
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('GRN Details'),
       ),

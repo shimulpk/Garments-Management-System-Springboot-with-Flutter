@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
 
 import '../models/item_request.dart';
 import '../provider/store_provider.dart';
@@ -31,6 +32,7 @@ class _EditItemScreenState extends ConsumerState<EditItemScreen> {
     final itemAsync = ref.watch(itemByIdProvider(widget.itemId));
 
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('Edit Item'),
       ),

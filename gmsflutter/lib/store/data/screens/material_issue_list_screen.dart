@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
 import 'package:go_router/go_router.dart';
 
 import '../provider/material_issue_provider.dart';
@@ -21,6 +22,7 @@ class _MaterialIssueListScreenState
     final issuesAsync = ref.watch(allMaterialIssuesProvider);
 
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('Material Issues'),
         actions: [

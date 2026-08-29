@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
 import 'package:go_router/go_router.dart';
 import '../provider/stock_provider.dart';
 
@@ -20,6 +21,7 @@ class _CurrentStockScreenState
     final stocksAsync = ref.watch(allStocksProvider);
 
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('Current Stock'),
         actions: [

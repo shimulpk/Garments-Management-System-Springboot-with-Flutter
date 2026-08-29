@@ -1,8 +1,11 @@
 import 'package:gmsflutter/auth/screens/login_screen.dart';
+
 import 'package:gmsflutter/cutting/data/screens/add_day_wise_production_screen.dart';
 import 'package:gmsflutter/cutting/data/screens/cutting_home_screen.dart';
 import 'package:gmsflutter/cutting/data/screens/cutting_plans_screen.dart';
 import 'package:gmsflutter/cutting/data/screens/production_history_screen.dart';
+import 'package:gmsflutter/procurement/data/screens/purchase_dashboard_screen.dart';
+
 import 'package:gmsflutter/store/data/screens/add_item_screen.dart';
 import 'package:gmsflutter/store/data/screens/add_store_requisition_screen.dart';
 import 'package:gmsflutter/store/data/screens/create_material_issue_screen.dart';
@@ -18,18 +21,27 @@ import 'package:gmsflutter/store/data/screens/material_issue_list_screen.dart';
 import 'package:gmsflutter/store/data/screens/store_dashboard_screen.dart';
 import 'package:gmsflutter/store/data/screens/store_requisition_details_screen.dart';
 import 'package:gmsflutter/store/data/screens/store_requisition_list_screen.dart';
+
 import 'package:go_router/go_router.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/login',
 
   routes: [
+    // ==================================================
+    // LOGIN
+    // ==================================================
+
     GoRoute(
       path: '/login',
       builder: (context, state) {
         return const LoginScreen();
       },
     ),
+
+    // ==================================================
+    // CUTTING
+    // ==================================================
 
     GoRoute(
       path: '/cutting',
@@ -59,12 +71,20 @@ final GoRouter appRouter = GoRouter(
       },
     ),
 
+    // ==================================================
+    // STORE DASHBOARD
+    // ==================================================
+
     GoRoute(
-      path: '/store-dashboard',
+      path: '/store/dashboard',
       builder: (context, state) {
         return const StoreDashboardScreen();
       },
     ),
+
+    // ==================================================
+    // ITEMS
+    // ==================================================
 
     GoRoute(
       path: '/store/items',
@@ -83,37 +103,53 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/store/items/edit/:id',
       builder: (context, state) {
-        final id = int.parse(state.pathParameters['id']!);
+        final id = int.parse(
+          state.pathParameters['id']!,
+        );
 
-        return EditItemScreen(itemId: id);
+        return EditItemScreen(
+          itemId: id,
+        );
       },
     ),
 
     GoRoute(
       path: '/store/items/details/:id',
       builder: (context, state) {
-        final id = int.parse(state.pathParameters['id']!);
+        final id = int.parse(
+          state.pathParameters['id']!,
+        );
 
-        return ItemDetailsScreen(itemId: id);
+        return ItemDetailsScreen(
+          itemId: id,
+        );
+      },
+    ),
+
+    // ==================================================
+    // STORE REQUISITIONS
+    // ==================================================
+
+    GoRoute(
+      path: '/store/requisitions',
+      builder: (context, state) {
+        return const StoreRequisitionListScreen();
       },
     ),
 
     GoRoute(
-      path: '/store/requisitions',
-      builder: (context, state) =>
-      const StoreRequisitionListScreen(),
-    ),
-
-    GoRoute(
       path: '/store/requisitions/add',
-      builder: (context, state) =>
-      const AddStoreRequisitionScreen(),
+      builder: (context, state) {
+        return const AddStoreRequisitionScreen();
+      },
     ),
 
     GoRoute(
       path: '/store/requisitions/details/:id',
       builder: (context, state) {
-        final id = int.parse(state.pathParameters['id']!);
+        final id = int.parse(
+          state.pathParameters['id']!,
+        );
 
         return StoreRequisitionDetailsScreen(
           requisitionId: id,
@@ -124,7 +160,9 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/store/requisitions/edit/:id',
       builder: (context, state) {
-        final id = int.parse(state.pathParameters['id']!);
+        final id = int.parse(
+          state.pathParameters['id']!,
+        );
 
         return EditStoreRequisitionScreen(
           requisitionId: id,
@@ -132,10 +170,15 @@ final GoRouter appRouter = GoRouter(
       },
     ),
 
+    // ==================================================
+    // GRN
+    // ==================================================
+
     GoRoute(
       path: '/store/grn',
-      builder: (context, state) =>
-      const GrnListScreen(),
+      builder: (context, state) {
+        return const GrnListScreen();
+      },
     ),
 
     GoRoute(
@@ -151,12 +194,11 @@ final GoRouter appRouter = GoRouter(
       },
     ),
 
-    // GoRoute(
-    //   path: '/store/grn/add',
-    //   builder: (context, state) {
-    //     return const CreateGrnScreen();
-    //   },
-    // ),
+    // Create GRN পরে হবে
+
+    // ==================================================
+    // MATERIAL ISSUES
+    // ==================================================
 
     GoRoute(
       path: '/store/material-issues',
@@ -175,7 +217,9 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/store/material-issues/details/:id',
       builder: (context, state) {
-        final id = int.parse(state.pathParameters['id']!);
+        final id = int.parse(
+          state.pathParameters['id']!,
+        );
 
         return MaterialIssueDetailsScreen(
           issueId: id,
@@ -183,10 +227,22 @@ final GoRouter appRouter = GoRouter(
       },
     ),
 
+    // ==================================================
+    // STOCK
+    // ==================================================
+
     GoRoute(
       path: '/store/stock',
       builder: (context, state) {
         return const CurrentStockScreen();
+      },
+    ),
+
+    // procurement
+    GoRoute(
+      path: '/procurement/dashboard',
+      builder: (context, state) {
+        return const PurchaseDashboardScreen();
       },
     ),
   ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
 
 import '../provider/store_provider.dart';
 
@@ -16,6 +17,7 @@ class ItemDetailsScreen extends ConsumerWidget {
     final itemAsync = ref.watch(itemByIdProvider(itemId));
 
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('Item Details'),
       ),
