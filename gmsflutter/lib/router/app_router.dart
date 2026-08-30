@@ -4,6 +4,7 @@ import 'package:gmsflutter/cutting/data/screens/add_day_wise_production_screen.d
 import 'package:gmsflutter/cutting/data/screens/cutting_home_screen.dart';
 import 'package:gmsflutter/cutting/data/screens/cutting_plans_screen.dart';
 import 'package:gmsflutter/cutting/data/screens/production_history_screen.dart';
+import 'package:gmsflutter/procurement/data/screens/add_vendor_screen.dart';
 import 'package:gmsflutter/procurement/data/screens/purchase_dashboard_screen.dart';
 
 import 'package:gmsflutter/store/data/screens/add_item_screen.dart';
@@ -243,6 +244,13 @@ final GoRouter appRouter = GoRouter(
       path: '/procurement/dashboard',
       builder: (context, state) {
         return const PurchaseDashboardScreen();
+      },
+    ),
+
+    GoRoute(
+      path: '/procurement/vendors/add',
+      builder: (context, state) {
+        return const AddVendorScreen();
       },
     ),
   ],
