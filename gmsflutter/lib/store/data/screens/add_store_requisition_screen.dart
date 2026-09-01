@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gmsflutter/widget/app_sidebar.dart';
+import 'package:go_router/go_router.dart';
 
 import '../models/store_requisition_item_request.dart';
 import '../models/store_requisition_request.dart';
@@ -268,7 +269,7 @@ class _AddStoreRequisitionScreenState
         ),
       );
 
-      Navigator.of(context).pop();
+      context.go('/store/requisitions');
     } catch (e) {
       if (!mounted) return;
 

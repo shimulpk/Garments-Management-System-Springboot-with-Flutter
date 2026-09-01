@@ -293,7 +293,7 @@ final GoRouter appRouter = GoRouter(
     ),
 
     GoRoute(
-      path: '/procurement/requisitions',
+      path: '/procurement/requisitions/pending',
       builder: (context, state) {
         return const PendingRequisitionScreen();
       },
