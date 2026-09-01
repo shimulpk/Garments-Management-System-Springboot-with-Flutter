@@ -5,7 +5,11 @@ import 'package:gmsflutter/cutting/data/screens/cutting_home_screen.dart';
 import 'package:gmsflutter/cutting/data/screens/cutting_plans_screen.dart';
 import 'package:gmsflutter/cutting/data/screens/production_history_screen.dart';
 import 'package:gmsflutter/procurement/data/screens/add_vendor_screen.dart';
+import 'package:gmsflutter/procurement/data/screens/edit_vendor_screen.dart';
+import 'package:gmsflutter/procurement/data/screens/pending_requisition_screen.dart';
 import 'package:gmsflutter/procurement/data/screens/purchase_dashboard_screen.dart';
+import 'package:gmsflutter/procurement/data/screens/vendor_details_screen.dart';
+import 'package:gmsflutter/procurement/data/screens/vendor_list_screen.dart';
 
 import 'package:gmsflutter/store/data/screens/add_item_screen.dart';
 import 'package:gmsflutter/store/data/screens/add_store_requisition_screen.dart';
@@ -247,10 +251,51 @@ final GoRouter appRouter = GoRouter(
       },
     ),
 
+
     GoRoute(
       path: '/procurement/vendors/add',
       builder: (context, state) {
         return const AddVendorScreen();
+      },
+    ),
+
+    GoRoute(
+      path: '/procurement/vendors',
+      builder: (context, state) {
+        return const VendorListScreen();
+      },
+    ),
+
+    GoRoute(
+      path: '/procurement/vendors/details/:id',
+      builder: (context, state) {
+        final id = int.parse(
+          state.pathParameters['id']!,
+        );
+
+        return VendorDetailsScreen(
+          vendorId: id,
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/procurement/vendors/edit/:id',
+      builder: (context, state) {
+        final id = int.parse(
+          state.pathParameters['id']!,
+        );
+
+        return EditVendorScreen(
+          vendorId: id,
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/procurement/requisitions',
+      builder: (context, state) {
+        return const PendingRequisitionScreen();
       },
     ),
   ],

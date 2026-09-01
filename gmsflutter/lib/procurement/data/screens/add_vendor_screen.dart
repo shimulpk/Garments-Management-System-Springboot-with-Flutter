@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gmsflutter/widget/app_sidebar.dart';
+import 'package:go_router/go_router.dart';
 
 import '../models/vendor_request.dart';
 import '../provider/vendor_provider.dart';
@@ -53,7 +54,7 @@ class _AddVendorScreenState
         ),
       );
 
-      Navigator.of(context).pop();
+      context.go('/procurement/vendors');
     } catch (e) {
       if (!mounted) return;
 
