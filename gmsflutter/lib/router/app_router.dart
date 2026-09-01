@@ -5,9 +5,12 @@ import 'package:gmsflutter/cutting/data/screens/cutting_home_screen.dart';
 import 'package:gmsflutter/cutting/data/screens/cutting_plans_screen.dart';
 import 'package:gmsflutter/cutting/data/screens/production_history_screen.dart';
 import 'package:gmsflutter/procurement/data/screens/add_vendor_screen.dart';
+import 'package:gmsflutter/procurement/data/screens/create_purchase_order_screen.dart';
 import 'package:gmsflutter/procurement/data/screens/edit_vendor_screen.dart';
 import 'package:gmsflutter/procurement/data/screens/pending_requisition_screen.dart';
 import 'package:gmsflutter/procurement/data/screens/purchase_dashboard_screen.dart';
+import 'package:gmsflutter/procurement/data/screens/purchase_order_details_screen.dart';
+import 'package:gmsflutter/procurement/data/screens/purchase_order_list_screen.dart';
 import 'package:gmsflutter/procurement/data/screens/vendor_details_screen.dart';
 import 'package:gmsflutter/procurement/data/screens/vendor_list_screen.dart';
 
@@ -296,6 +299,45 @@ final GoRouter appRouter = GoRouter(
       path: '/procurement/requisitions/pending',
       builder: (context, state) {
         return const PendingRequisitionScreen();
+      },
+    ),
+    GoRoute(
+      path: '/procurement/requisitions/details/:id',
+      builder: (context, state) {
+        final id = int.parse(
+          state.pathParameters['id']!,
+        );
+
+        return StoreRequisitionDetailsScreen(
+          requisitionId: id,
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/procurement/purchase-orders/add',
+      builder: (context, state) {
+        return const CreatePurchaseOrderScreen();
+      },
+    ),
+
+    GoRoute(
+      path: '/procurement/purchase-orders',
+      builder: (context, state) {
+        return const PurchaseOrderListScreen();
+      },
+    ),
+
+    GoRoute(
+      path: '/procurement/purchase-orders/details/:id',
+      builder: (context, state) {
+        final id = int.parse(
+          state.pathParameters['id']!,
+        );
+
+        return PurchaseOrderDetailsScreen(
+          purchaseOrderId: id,
+        );
       },
     ),
   ],
