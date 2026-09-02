@@ -7,6 +7,7 @@ class GoodsReceiveNoteResponse {
   String? challanNo;
   double? grandTotal;
   String? remarks;
+
   List<GoodsReceiveNoteItemResponse> items;
 
   GoodsReceiveNoteResponse({
@@ -21,39 +22,32 @@ class GoodsReceiveNoteResponse {
     this.items = const [],
   });
 
-  GoodsReceiveNoteResponse.fromJson(Map<String, dynamic> json)
-      : items = (json['items'] as List<dynamic>?)
-      ?.map(
-        (item) => GoodsReceiveNoteItemResponse.fromJson(
-      item as Map<String, dynamic>,
-    ),
-  )
-      .toList() ??
-      [] {
-    id = json['id'];
-    grnNo = json['grnNo'];
-    grnDate = json['grnDate'];
-    purchaseOrderId = json['purchaseOrderId'];
-    poNo = json['poNo'];
-    challanNo = json['challanNo'];
-    grandTotal = (json['grandTotal'] as num?)?.toDouble();
-    remarks = json['remarks'];
-  }
+  factory GoodsReceiveNoteResponse.fromJson(
+      Map<String, dynamic> json) {
+    return GoodsReceiveNoteResponse(
+      id: json['id'],
+      grnNo: json['grnNo'],
+      grnDate: json['grnDate'],
+      purchaseOrderId: json['purchaseOrderId'],
+      poNo: json['poNo'],
+      challanNo: json['challanNo'],
+      grandTotal:
+      (json['grandTotal'] as num?)?.toDouble(),
+      remarks: json['remarks'],
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'grnNo': grnNo,
-      'grnDate': grnDate,
-      'purchaseOrderId': purchaseOrderId,
-      'poNo': poNo,
-      'challanNo': challanNo,
-      'grandTotal': grandTotal,
-      'remarks': remarks,
-      'items': items.map((item) => item.toJson()).toList(),
-    };
+      items: (json['items'] as List?)
+          ?.map(
+            (e) =>
+            GoodsReceiveNoteItemResponse.fromJson(
+              e as Map<String, dynamic>,
+            ),
+      )
+          .toList() ??
+          [],
+    );
   }
 }
+
 
 class GoodsReceiveNoteItemResponse {
   int? id;
@@ -76,29 +70,21 @@ class GoodsReceiveNoteItemResponse {
     this.lineTotal,
   });
 
-  GoodsReceiveNoteItemResponse.fromJson(
-      Map<String, dynamic> json,
-      ) {
-    id = json['id'];
-    purchaseOrderItemId = json['purchaseOrderItemId'];
-    itemId = json['itemId'];
-    itemName = json['itemName'];
-    unit = json['unit'];
-    quantity = (json['quantity'] as num?)?.toDouble();
-    unitPrice = (json['unitPrice'] as num?)?.toDouble();
-    lineTotal = (json['lineTotal'] as num?)?.toDouble();
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'purchaseOrderItemId': purchaseOrderItemId,
-      'itemId': itemId,
-      'itemName': itemName,
-      'unit': unit,
-      'quantity': quantity,
-      'unitPrice': unitPrice,
-      'lineTotal': lineTotal,
-    };
+  factory GoodsReceiveNoteItemResponse.fromJson(
+      Map<String, dynamic> json) {
+    return GoodsReceiveNoteItemResponse(
+      id: json['id'],
+      purchaseOrderItemId:
+      json['purchaseOrderItemId'],
+      itemId: json['itemId'],
+      itemName: json['itemName'],
+      unit: json['unit'],
+      quantity:
+      (json['quantity'] as num?)?.toDouble(),
+      unitPrice:
+      (json['unitPrice'] as num?)?.toDouble(),
+      lineTotal:
+      (json['lineTotal'] as num?)?.toDouble(),
+    );
   }
 }

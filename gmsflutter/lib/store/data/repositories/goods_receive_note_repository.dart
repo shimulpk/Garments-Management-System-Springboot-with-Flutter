@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:gmsflutter/util/api_client.dart';
 import 'package:gmsflutter/util/api_constants.dart';
 
-import '../models/goods_receive_note_request.dart';
 import '../models/goods_receive_note_response.dart';
 
 class GoodsReceiveNoteRepository {
@@ -12,13 +11,16 @@ class GoodsReceiveNoteRepository {
 
   Dio get _dio => _apiClient.dio;
 
-  // Create GRN
+
+  // ======================================================
+  // CREATE GRN
+  // ======================================================
+
   Future<GoodsReceiveNoteResponse> create(
-      GoodsReceiveNoteRequest request,
-      ) async {
+      Map<String, dynamic> request) async {
     final response = await _dio.post(
       ApiConstants.grns,
-      data: request.toJson(),
+      data: request,
     );
 
     return GoodsReceiveNoteResponse.fromJson(
@@ -26,7 +28,11 @@ class GoodsReceiveNoteRepository {
     );
   }
 
-  // Get All GRNs
+
+  // ======================================================
+  // GET ALL GRNs
+  // ======================================================
+
   Future<List<GoodsReceiveNoteResponse>> getAll() async {
     final response = await _dio.get(
       ApiConstants.grns,
@@ -36,19 +42,22 @@ class GoodsReceiveNoteRepository {
 
     return data
         .map(
-          (item) => GoodsReceiveNoteResponse.fromJson(
-        item as Map<String, dynamic>,
+          (e) => GoodsReceiveNoteResponse.fromJson(
+        e as Map<String, dynamic>,
       ),
     )
         .toList();
   }
 
-  // Get GRN By ID
+
+  // ======================================================
+  // GET GRN BY ID
+  // ======================================================
+
   Future<GoodsReceiveNoteResponse> getById(
-      int id,
-      ) async {
+      int id) async {
     final response = await _dio.get(
-      ApiConstants.grnById(id),
+      '${ApiConstants.grns}/$id',
     );
 
     return GoodsReceiveNoteResponse.fromJson(
