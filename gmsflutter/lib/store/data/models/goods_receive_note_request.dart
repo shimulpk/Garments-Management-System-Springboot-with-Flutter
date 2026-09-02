@@ -1,14 +1,14 @@
 class GoodsReceiveNoteRequest {
-  String? grnDate;
-  int? purchaseOrderId;
-  String? challanNo;
-  String? remarks;
+  String grnDate;
+  int purchaseOrderId;
+  String challanNo;
+  String remarks;
 
   GoodsReceiveNoteRequest({
-    this.grnDate,
-    this.purchaseOrderId,
-    this.challanNo,
-    this.remarks,
+    required this.grnDate,
+    required this.purchaseOrderId,
+    required this.challanNo,
+    required this.remarks,
   });
 
   Map<String, dynamic> toJson() {

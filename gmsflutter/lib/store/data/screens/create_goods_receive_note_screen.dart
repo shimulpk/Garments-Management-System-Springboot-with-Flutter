@@ -419,7 +419,7 @@ class _CreateGoodsReceiveNoteScreenState
 
       // Refresh GRN list
       ref.invalidate(
-        allGoodsReceiveNotesProvider,
+        allGrnsProvider,
       );
 
       // Refresh pending PO list
