@@ -357,7 +357,7 @@ class AppSidebar extends StatelessWidget {
         required String route,
       }) {
     final currentLocation =
-    GoRouterState.of(context).uri.toString();
+    GoRouter.of(context).routerDelegate.currentConfiguration.uri.toString();
 
     final isActive =
         currentLocation == route ||

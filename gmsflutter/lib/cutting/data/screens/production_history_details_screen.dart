@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gmsflutter/cutting/data/provider/cutting_provider.dart';
 import 'package:gmsflutter/cutting/data/screens/edit_day_wise_production_screen.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
 
 class ProductionHistoryDetailsScreen extends ConsumerWidget {
   const ProductionHistoryDetailsScreen({
@@ -31,6 +32,7 @@ class ProductionHistoryDetailsScreen extends ConsumerWidget {
     ref.watch(cuttingHistorySummaryProvider(params));
 
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('Production Details'),
       ),

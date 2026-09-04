@@ -76,6 +76,9 @@ Future<List<ItemResponse>> getAllItems() async{
   Future<void> deleteItem(int id) async {
     await _dio.delete(
       ApiConstants.itemById(id),
+      options: Options(
+        responseType: ResponseType.plain,
+      ),
     );
   }
 

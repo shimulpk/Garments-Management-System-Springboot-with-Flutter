@@ -91,6 +91,9 @@ class VendorRepository {
       ) async {
     await _dio.delete(
       '${ApiConstants.vendors}/$id',
+      options: Options(
+        responseType: ResponseType.plain,
+      ),
     );
   }
 }

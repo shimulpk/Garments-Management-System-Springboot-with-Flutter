@@ -16,6 +16,7 @@ import 'package:gmsflutter/procurement/data/screens/vendor_list_screen.dart';
 
 import 'package:gmsflutter/store/data/screens/add_item_screen.dart';
 import 'package:gmsflutter/store/data/screens/add_store_requisition_screen.dart';
+import 'package:gmsflutter/store/data/screens/create_goods_receive_note_screen.dart';
 import 'package:gmsflutter/store/data/screens/create_material_issue_screen.dart';
 import 'package:gmsflutter/store/data/screens/current_stock_screen.dart';
 import 'package:gmsflutter/store/data/screens/edit_item_screen.dart';
@@ -190,6 +191,13 @@ final GoRouter appRouter = GoRouter(
     ),
 
     GoRoute(
+      path: '/store/grn/add',
+      builder: (context, state) {
+        return const CreateGoodsReceiveNoteScreen();
+      },
+    ),
+
+    GoRoute(
       path: '/store/grn/details/:id',
       builder: (context, state) {
         final id = int.parse(
@@ -202,7 +210,6 @@ final GoRouter appRouter = GoRouter(
       },
     ),
 
-    // Create GRN পরে হবে
 
     // ==================================================
     // MATERIAL ISSUES

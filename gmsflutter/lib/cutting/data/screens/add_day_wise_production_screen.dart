@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
+import 'package:go_router/go_router.dart';
 
 import '../models/day_wise_cutting_production_request.dart';
 import '../provider/cutting_provider.dart';
@@ -100,7 +102,7 @@ class _AddDayWiseProductionScreenState
           ),
         );
 
-        Navigator.of(context).pop();
+        context.go('/cutting/plans');
       }
     } catch (e) {
       if (mounted) {
@@ -123,6 +125,7 @@ class _AddDayWiseProductionScreenState
     ref.watch(pendingCuttingPlansProvider);
 
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('Day Wise Entry'),
       ),

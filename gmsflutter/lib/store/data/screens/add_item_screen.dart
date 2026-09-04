@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gmsflutter/widget/app_sidebar.dart';
+import 'package:go_router/go_router.dart';
 
 import '../models/item_request.dart';
 import '../provider/store_provider.dart';
@@ -48,7 +49,8 @@ class _AddItemScreenState extends ConsumerState<AddItemScreen> {
         ),
       );
 
-      Navigator.of(context).pop();
+      context.go('/store/items');
+
     } catch (e) {
       if (!mounted) return;
 

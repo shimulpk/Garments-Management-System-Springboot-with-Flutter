@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
+import 'package:go_router/go_router.dart';
 
 import '../models/day_wise_cutting_production_update_request.dart';
 import '../provider/cutting_provider.dart';
@@ -75,7 +77,7 @@ class _EditDayWiseProductionScreenState
         ),
       );
 
-      Navigator.of(context).pop(true);
+      context.go('/cutting/plans');
     } catch (e) {
       if (!mounted) return;
 
@@ -103,6 +105,7 @@ class _EditDayWiseProductionScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('Edit Production'),
       ),

@@ -52,6 +52,7 @@ class _AddVendorScreenState
         const SnackBar(
           content: Text('Vendor created successfully!'),
         ),
+
       );
 
       context.go('/procurement/vendors');

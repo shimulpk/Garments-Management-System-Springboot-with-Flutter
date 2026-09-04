@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
 
 import '../models/cutting_plan_response.dart';
 import '../provider/cutting_provider.dart';
@@ -71,6 +72,7 @@ class _CuttingPlansScreenState
     final plansAsync = ref.watch(allCuttingPlansProvider);
 
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('Cutting Plans'),
 

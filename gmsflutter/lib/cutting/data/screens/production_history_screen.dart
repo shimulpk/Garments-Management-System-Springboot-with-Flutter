@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gmsflutter/cutting/data/screens/production_history_details_screen.dart';
+import 'package:gmsflutter/widget/app_sidebar.dart';
 
 import '../provider/cutting_provider.dart';
 
@@ -51,6 +52,7 @@ class _ProductionHistoryScreenState
     ref.watch(cuttingHistoryProvider(_selectedDate));
 
     return Scaffold(
+      drawer: const AppSidebar(),
       appBar: AppBar(
         title: const Text('Production History'),
         actions: [

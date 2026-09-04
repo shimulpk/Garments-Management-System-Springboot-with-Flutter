@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gmsflutter/store/data/models/stock_response.dart';
 import 'package:gmsflutter/store/data/provider/stock_provider.dart';
 import 'package:gmsflutter/widget/app_sidebar.dart';
+import 'package:go_router/go_router.dart';
 
 import '../models/material_issue_request.dart';
 import '../provider/material_issue_provider.dart';
@@ -278,7 +279,7 @@ class _CreateMaterialIssueScreenState
         ),
       );
 
-      Navigator.pop(context);
+      context.go('/store/material-issues');
     } catch (e) {
       if (!mounted) {
         return;

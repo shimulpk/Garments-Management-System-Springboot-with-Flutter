@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gmsflutter/procurement/data/provider/purchase_order_provider.dart';
 import 'package:gmsflutter/widget/app_sidebar.dart';
-
+import 'package:go_router/go_router.dart';
 
 import '../models/goods_receive_note_request.dart';
 import '../provider/goods_receive_note_provider.dart';
@@ -32,7 +32,6 @@ class _CreateGoodsReceiveNoteScreenState
 
   @override
   Widget build(BuildContext context) {
-
     final pendingPurchaseOrdersAsync =
     ref.watch(pendingPurchaseOrdersProvider);
 
@@ -58,9 +57,12 @@ class _CreateGoodsReceiveNoteScreenState
         // =====================================
 
         error: (error, stack) => Center(
-          child: Text(
-            'Failed to load purchase orders\n$error',
-            textAlign: TextAlign.center,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Text(
+              'Failed to load purchase orders\n$error',
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
 
@@ -76,8 +78,7 @@ class _CreateGoodsReceiveNoteScreenState
               : purchaseOrders
               .where(
                 (po) =>
-            po.id ==
-                _selectedPurchaseOrderId,
+            po.id == _selectedPurchaseOrderId,
           )
               .firstOrNull;
 
@@ -103,8 +104,7 @@ class _CreateGoodsReceiveNoteScreenState
                     border: OutlineInputBorder(),
                   ),
 
-                  controller:
-                  TextEditingController(
+                  controller: TextEditingController(
                     text: _grnDate,
                   ),
                 ),
@@ -144,10 +144,8 @@ class _CreateGoodsReceiveNoteScreenState
                   ).toList(),
 
                   onChanged: (value) {
-
                     setState(() {
-                      _selectedPurchaseOrderId =
-                          value;
+                      _selectedPurchaseOrderId = value;
                     });
                   },
 
@@ -171,8 +169,7 @@ class _CreateGoodsReceiveNoteScreenState
                     elevation: 2,
 
                     child: Padding(
-                      padding:
-                      const EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
 
                       child: Column(
                         crossAxisAlignment:
@@ -246,14 +243,12 @@ class _CreateGoodsReceiveNoteScreenState
 
                   ...selectedPO.items.map(
                         (item) => Card(
-                      margin:
-                      const EdgeInsets.only(
+                      margin: const EdgeInsets.only(
                         bottom: 10,
                       ),
 
                       child: ListTile(
-                        leading:
-                        const CircleAvatar(
+                        leading: const CircleAvatar(
                           child: Icon(
                             Icons.inventory_2_outlined,
                           ),
@@ -293,8 +288,7 @@ class _CreateGoodsReceiveNoteScreenState
                 // =====================================
 
                 TextFormField(
-                  controller:
-                  _challanNoController,
+                  controller: _challanNoController,
 
                   decoration: const InputDecoration(
                     labelText: 'Challan No',
@@ -320,8 +314,7 @@ class _CreateGoodsReceiveNoteScreenState
                 // =====================================
 
                 TextFormField(
-                  controller:
-                  _remarksController,
+                  controller: _remarksController,
 
                   maxLines: 3,
 
@@ -376,7 +369,6 @@ class _CreateGoodsReceiveNoteScreenState
     );
   }
 
-
   // ==========================================
   // SUBMIT GRN
   // ==========================================
@@ -395,8 +387,7 @@ class _CreateGoodsReceiveNoteScreenState
       _saving = true;
     });
 
-    final request =
-    GoodsReceiveNoteRequest(
+    final request = GoodsReceiveNoteRequest(
       grnDate: _grnDate,
 
       purchaseOrderId:
@@ -412,30 +403,30 @@ class _CreateGoodsReceiveNoteScreenState
     try {
 
       await ref
-          .read(
-        goodsReceiveNoteRepositoryProvider,
-      )
+          .read(goodsReceiveNoteRepositoryProvider)
           .create(request);
 
-      // Refresh GRN list
-      ref.invalidate(
-        allGrnsProvider,
-      );
+      // =====================================
+      // REFRESH GRN LIST
+      // =====================================
 
-      // Refresh pending PO list
-      ref.invalidate(
-        pendingPurchaseOrdersProvider,
-      );
+      ref.invalidate(allGrnsProvider);
 
-      // Refresh all PO list
-      ref.invalidate(
-        allPurchaseOrdersProvider,
-      );
+      // =====================================
+      // REFRESH PENDING PO LIST
+      // =====================================
+
+      ref.invalidate(pendingPurchaseOrdersProvider);
+
+      // =====================================
+      // REFRESH ALL PO LIST
+      // =====================================
+
+      ref.invalidate(allPurchaseOrdersProvider);
 
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context)
-          .showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
             'Goods received successfully!',
@@ -443,14 +434,15 @@ class _CreateGoodsReceiveNoteScreenState
         ),
       );
 
-      Navigator.of(context).pop();
+
+      context.go('/store/grn');
+
 
     } catch (e) {
 
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context)
-          .showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
             'GRN creation failed: $e',
@@ -468,6 +460,9 @@ class _CreateGoodsReceiveNoteScreenState
     }
   }
 
+  // ==========================================
+  // DISPOSE
+  // ==========================================
 
   @override
   void dispose() {
