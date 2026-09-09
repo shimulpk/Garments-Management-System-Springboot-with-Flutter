@@ -14,7 +14,15 @@ class CuttingHomeScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F7FA),
 
+      // ==================================================
+      // SIDEBAR
+      // ==================================================
+
       drawer: const AppSidebar(),
+
+      // ==================================================
+      // APP BAR
+      // ==================================================
 
       appBar: AppBar(
         title: const Text(
@@ -23,6 +31,7 @@ class CuttingHomeScreen extends ConsumerWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -33,7 +42,12 @@ class CuttingHomeScreen extends ConsumerWidget {
         ],
       ),
 
+      // ==================================================
+      // BODY
+      // ==================================================
+
       body: dashboardAsync.when(
+
         // ==================================================
         // LOADING
         // ==================================================
@@ -49,9 +63,12 @@ class CuttingHomeScreen extends ConsumerWidget {
         error: (error, stack) => Center(
           child: Padding(
             padding: const EdgeInsets.all(20),
+
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+
               children: [
+
                 const Icon(
                   Icons.error_outline,
                   size: 55,
@@ -82,7 +99,9 @@ class CuttingHomeScreen extends ConsumerWidget {
                       cuttingDashboardProvider,
                     );
                   },
+
                   icon: const Icon(Icons.refresh),
+
                   label: const Text('Retry'),
                 ),
               ],
@@ -95,8 +114,10 @@ class CuttingHomeScreen extends ConsumerWidget {
         // ==================================================
 
         data: (dashboard) {
+
           return RefreshIndicator(
             onRefresh: () async {
+
               ref.invalidate(
                 cuttingDashboardProvider,
               );
@@ -110,12 +131,14 @@ class CuttingHomeScreen extends ConsumerWidget {
               padding: const EdgeInsets.all(20),
 
               children: [
+
                 // ==================================================
                 // HEADER
                 // ==================================================
 
                 const Text(
                   'Welcome, User',
+
                   style: TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
@@ -126,6 +149,7 @@ class CuttingHomeScreen extends ConsumerWidget {
 
                 Text(
                   _currentDate(),
+
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.grey.shade600,
@@ -135,11 +159,12 @@ class CuttingHomeScreen extends ConsumerWidget {
                 const SizedBox(height: 28),
 
                 // ==================================================
-                // SUMMARY TITLE
+                // SECTION TITLE
                 // ==================================================
 
                 const Text(
                   'Production Overview',
+
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -149,17 +174,21 @@ class CuttingHomeScreen extends ConsumerWidget {
                 const SizedBox(height: 15),
 
                 // ==================================================
-                // SUMMARY CARDS ROW 1
+                // ROW 1
                 // ==================================================
 
                 Row(
                   children: [
+
                     Expanded(
                       child: _DashboardCard(
                         title: 'Today Cutting',
+
                         value:
                         '${dashboard.todayCutting ?? 0}',
+
                         icon: Icons.content_cut,
+
                         iconColor: Colors.blue,
                       ),
                     ),
@@ -169,9 +198,12 @@ class CuttingHomeScreen extends ConsumerWidget {
                     Expanded(
                       child: _DashboardCard(
                         title: 'Today Reject',
+
                         value:
                         '${dashboard.todayReject ?? 0}',
+
                         icon: Icons.cancel_outlined,
+
                         iconColor: Colors.red,
                       ),
                     ),
@@ -181,17 +213,21 @@ class CuttingHomeScreen extends ConsumerWidget {
                 const SizedBox(height: 12),
 
                 // ==================================================
-                // SUMMARY CARDS ROW 2
+                // ROW 2
                 // ==================================================
 
                 Row(
                   children: [
+
                     Expanded(
                       child: _DashboardCard(
                         title: 'Total Plans',
+
                         value:
                         '${dashboard.totalPlans ?? 0}',
+
                         icon: Icons.assignment_outlined,
+
                         iconColor: Colors.indigo,
                       ),
                     ),
@@ -201,9 +237,12 @@ class CuttingHomeScreen extends ConsumerWidget {
                     Expanded(
                       child: _DashboardCard(
                         title: 'Pending Plans',
+
                         value:
                         '${dashboard.pendingPlans ?? 0}',
+
                         icon: Icons.pending_actions,
+
                         iconColor: Colors.orange,
                       ),
                     ),
@@ -213,95 +252,63 @@ class CuttingHomeScreen extends ConsumerWidget {
                 const SizedBox(height: 12),
 
                 // ==================================================
-                // SUMMARY CARDS ROW 3
+                // ROW 3
                 // ==================================================
 
                 _DashboardCard(
                   title: 'Completed Plans',
+
                   value:
                   '${dashboard.completedPlans ?? 0}',
+
                   icon: Icons.check_circle_outline,
+
                   iconColor: Colors.green,
                 ),
 
                 const SizedBox(height: 30),
 
                 // ==================================================
-                // TODAY'S CUTTING
+                // INFORMATION CARD
                 // ==================================================
 
-                _SectionHeader(
-                  title: "Today's Cutting",
-                  icon: Icons.content_cut,
-                ),
+                Card(
+                  elevation: 2,
 
-                const SizedBox(height: 12),
-
-                if (dashboard.todayCuttings == null ||
-                    dashboard.todayCuttings!.isEmpty)
-
-                  _EmptyCard(
-                    icon: Icons.content_cut_outlined,
-                    message:
-                    'No cutting production recorded today.',
-                  )
-
-                else
-
-                  ...dashboard.todayCuttings!.map(
-                        (production) {
-                      return _TodayCuttingCard(
-                        styleNo:
-                        production.styleNo ?? '-',
-                        cuttingMaster:
-                        production.cuttingMaster ?? '-',
-                        cutPieces:
-                        production.actualCutPieces ?? 0,
-                        rejectPieces:
-                        production.rejectPieces ?? 0,
-                      );
-                    },
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                    BorderRadius.circular(15),
                   ),
 
-                const SizedBox(height: 30),
+                  child: Padding(
+                    padding:
+                    const EdgeInsets.all(16),
 
-                // ==================================================
-                // RECENT CUTTING PLANS
-                // ==================================================
+                    child: Row(
+                      children: [
 
-                _SectionHeader(
-                  title: 'Recent Cutting Plans',
-                  icon: Icons.assignment_outlined,
-                ),
+                        Icon(
+                          Icons.info_outline,
 
-                const SizedBox(height: 12),
+                          color:
+                          Theme.of(context)
+                              .colorScheme
+                              .primary,
+                        ),
 
-                if (dashboard.recentPlans == null ||
-                    dashboard.recentPlans!.isEmpty)
+                        const SizedBox(width: 12),
 
-                  _EmptyCard(
-                    icon: Icons.assignment_outlined,
-                    message: 'No cutting plans found.',
-                  )
-
-                else
-
-                  ...dashboard.recentPlans!.map(
-                        (plan) {
-                      return _RecentPlanCard(
-                        planId:
-                        plan.cuttingPlanId,
-                        styleNo:
-                        plan.styleNo ?? '-',
-                        orderId:
-                        plan.orderId,
-                        plannedPieces:
-                        plan.plannedPieces ?? 0,
-                        status:
-                        plan.status?.toString() ?? '-',
-                      );
-                    },
+                        const Expanded(
+                          child: Text(
+                            'Use the sidebar to access '
+                                'Day Wise Entry, Cutting Plans '
+                                'and Production History.',
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+                ),
 
                 const SizedBox(height: 20),
               ],
@@ -360,25 +367,31 @@ class _DashboardCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Card(
       elevation: 3,
 
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18),
+        borderRadius:
+        BorderRadius.circular(18),
       ),
 
       child: Container(
         height: 145,
 
-        padding: const EdgeInsets.symmetric(
+        padding:
+        const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 12,
         ),
 
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment:
+          MainAxisAlignment.center,
 
           children: [
+
+            // ICON
             Icon(
               icon,
               size: 28,
@@ -387,11 +400,16 @@ class _DashboardCard extends StatelessWidget {
 
             const SizedBox(height: 6),
 
+            // TITLE
             Text(
               title,
+
               textAlign: TextAlign.center,
+
               maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+
+              overflow:
+              TextOverflow.ellipsis,
 
               style: const TextStyle(
                 fontSize: 14,
@@ -401,6 +419,7 @@ class _DashboardCard extends StatelessWidget {
 
             const SizedBox(height: 5),
 
+            // VALUE
             Text(
               value,
 
@@ -408,427 +427,6 @@ class _DashboardCard extends StatelessWidget {
                 fontSize: 26,
                 fontWeight: FontWeight.bold,
                 color: iconColor,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-
-// ==========================================================
-// SECTION HEADER
-// ==========================================================
-
-class _SectionHeader extends StatelessWidget {
-  const _SectionHeader({
-    required this.title,
-    required this.icon,
-  });
-
-  final String title;
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(
-          icon,
-          color: Theme.of(context)
-              .colorScheme
-              .primary,
-        ),
-
-        const SizedBox(width: 8),
-
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-
-// ==========================================================
-// TODAY CUTTING CARD
-// ==========================================================
-
-class _TodayCuttingCard extends StatelessWidget {
-  const _TodayCuttingCard({
-    required this.styleNo,
-    required this.cuttingMaster,
-    required this.cutPieces,
-    required this.rejectPieces,
-  });
-
-  final String styleNo;
-  final String cuttingMaster;
-  final num cutPieces;
-  final num rejectPieces;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 10),
-
-      elevation: 2,
-
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-
-      child: Padding(
-        padding: const EdgeInsets.all(15),
-
-        child: Column(
-          crossAxisAlignment:
-          CrossAxisAlignment.start,
-
-          children: [
-            Row(
-              children: [
-                const CircleAvatar(
-                  child: Icon(
-                    Icons.content_cut,
-                  ),
-                ),
-
-                const SizedBox(width: 12),
-
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment:
-                    CrossAxisAlignment.start,
-
-                    children: [
-                      const Text(
-                        'Style No',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey,
-                        ),
-                      ),
-
-                      Text(
-                        styleNo,
-                        style: const TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                Container(
-                  padding:
-                  const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 6,
-                  ),
-
-                  decoration: BoxDecoration(
-                    borderRadius:
-                    BorderRadius.circular(20),
-
-                    color:
-                    Colors.blue.withOpacity(0.1),
-                  ),
-
-                  child: Text(
-                    '$cutPieces pcs',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            const Divider(height: 24),
-
-            Row(
-              children: [
-                Expanded(
-                  child: _InfoItem(
-                    icon: Icons.person_outline,
-                    title: 'Cutting Master',
-                    value: cuttingMaster,
-                  ),
-                ),
-
-                Expanded(
-                  child: _InfoItem(
-                    icon: Icons.content_cut,
-                    title: 'Cut Pieces',
-                    value: '$cutPieces',
-                  ),
-                ),
-
-                Expanded(
-                  child: _InfoItem(
-                    icon: Icons.cancel_outlined,
-                    title: 'Reject',
-                    value: '$rejectPieces',
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-
-// ==========================================================
-// RECENT PLAN CARD
-// ==========================================================
-
-class _RecentPlanCard extends StatelessWidget {
-  const _RecentPlanCard({
-    required this.planId,
-    required this.styleNo,
-    required this.orderId,
-    required this.plannedPieces,
-    required this.status,
-  });
-
-  final dynamic planId;
-  final String styleNo;
-  final dynamic orderId;
-  final num plannedPieces;
-  final String status;
-
-  @override
-  Widget build(BuildContext context) {
-    final normalizedStatus =
-    status.toUpperCase();
-
-    final isCompleted =
-    normalizedStatus.contains('COMPLETED');
-
-    return Card(
-      margin: const EdgeInsets.only(bottom: 10),
-
-      elevation: 2,
-
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-
-      child: Padding(
-        padding: const EdgeInsets.all(15),
-
-        child: Column(
-          children: [
-            Row(
-              children: [
-                const CircleAvatar(
-                  child: Icon(
-                    Icons.assignment_outlined,
-                  ),
-                ),
-
-                const SizedBox(width: 12),
-
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment:
-                    CrossAxisAlignment.start,
-
-                    children: [
-                      Text(
-                        'Plan #$planId',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-
-                      const SizedBox(height: 3),
-
-                      Text(
-                        'Style: $styleNo',
-                        style: TextStyle(
-                          color: Colors.grey.shade700,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                Container(
-                  padding:
-                  const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 6,
-                  ),
-
-                  decoration: BoxDecoration(
-                    borderRadius:
-                    BorderRadius.circular(20),
-
-                    color: isCompleted
-                        ? Colors.green.withOpacity(0.1)
-                        : Colors.orange.withOpacity(0.1),
-                  ),
-
-                  child: Text(
-                    status,
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: isCompleted
-                          ? Colors.green
-                          : Colors.orange,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            const Divider(height: 24),
-
-            Row(
-              children: [
-                Expanded(
-                  child: _InfoItem(
-                    icon: Icons.shopping_bag_outlined,
-                    title: 'Order ID',
-                    value: '$orderId',
-                  ),
-                ),
-
-                Expanded(
-                  child: _InfoItem(
-                    icon: Icons.inventory_2_outlined,
-                    title: 'Planned Pieces',
-                    value: '$plannedPieces',
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-
-// ==========================================================
-// INFO ITEM
-// ==========================================================
-
-class _InfoItem extends StatelessWidget {
-  const _InfoItem({
-    required this.icon,
-    required this.title,
-    required this.value,
-  });
-
-  final IconData icon;
-  final String title;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment:
-      CrossAxisAlignment.start,
-
-      children: [
-        Icon(
-          icon,
-          size: 19,
-          color: Theme.of(context)
-              .colorScheme
-              .primary,
-        ),
-
-        const SizedBox(width: 7),
-
-        Expanded(
-          child: Column(
-            crossAxisAlignment:
-            CrossAxisAlignment.start,
-
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 11,
-                  color: Colors.grey.shade600,
-                ),
-              ),
-
-              const SizedBox(height: 2),
-
-              Text(
-                value,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-
-                style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-
-// ==========================================================
-// EMPTY CARD
-// ==========================================================
-
-class _EmptyCard extends StatelessWidget {
-  const _EmptyCard({
-    required this.icon,
-    required this.message,
-  });
-
-  final IconData icon;
-  final String message;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(25),
-
-        child: Column(
-          children: [
-            Icon(
-              icon,
-              size: 40,
-              color: Colors.grey,
-            ),
-
-            const SizedBox(height: 10),
-
-            Text(
-              message,
-              textAlign: TextAlign.center,
-
-              style: TextStyle(
-                color: Colors.grey.shade600,
               ),
             ),
           ],
